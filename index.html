@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHANTOM - متجر الحسابات المميزة</title>
+
+    <style>
+        /* إعدادات عامة */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #0a0a0a;
+            color: #ffffff;
+            line-height: 1.6;
+            padding-top: 50px; /* مساحة للشريط التنبيهي */
+        }
+
+        /* شريط التنبيه العلوي */
+        .alert-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(90deg, #dc2626, #991b1b);
+            color: #fff;
+            text-align: center;
+            padding: 12px 20px;
+            font-size: 15px;
+            font-weight: bold;
+            z-index: 2000;
+            box-shadow: 0 2px 15px rgba(220, 38, 38, 0.4);
+        }
+
+        /* الهيدر (رأس الصفحة) */
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(180deg, #1a0033, #0a0a0a);
+        }
+
+        .logo {
+            width: 200px;
+            max-width: 85%;
+            border-radius: 20px;
+            box-shadow: 0 0 35px rgba(138, 43, 226, 0.6);
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        h1 {
+            margin-top: 20px;
+            font-size: 48px;
+            color: #a855f7;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            margin-top: 12px;
+            color: #b3b3b3;
+            font-size: 19px;
+            font-weight: 300;
+        }
+
+        /* الأزرار */
+        .btn {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 14px 40px;
+            background: #8a2be2;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 17px;
+            box-shadow: 0 4px 15px rgba(138, 43, 226, 0.4);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn:hover {
+            background: #a855f7;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(168, 85, 247, 0.6);
+        }
+
+        /* الحاويات والأقسام */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+            padding: 60px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 34px;
+            margin-bottom: 40px;
+            color: #a855f7;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: #8a2be2;
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        /* شبكة الكروت */
+        .grid-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: #141414;
+            padding: 30px;
+            border-radius: 18px;
+            border: 1px solid #252525;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer; /* جعل الكرت قابل للضغط */
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: #8a2be2;
+            box-shadow: 0 10px 25px rgba(138, 43, 226, 0.2);
+        }
+
+        .card h3 {
+            font-size: 22px;
+            margin-bottom: 12px;
+            color: #a855f7;
+        }
+
+        .card p {
+            color: #aaaaaa;
+            font-size: 15px;
+        }
+
+        .price {
+            font-size: 26px;
+            font-weight: bold;
+            color: #ffffff;
+            margin-top: 20px;
+            background: rgba(138, 43, 226, 0.1);
+            padding: 8px;
+            border-radius: 8px;
+            display: inline-block;
+            width: 100%;
+        }
+
+        /* زر التفاصيل الصغير في الكرت */
+        .view-details {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #a855f7;
+            text-decoration: underline;
+        }
+
+        /* نافذة منبثقة (Modal) */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 3000; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            background-color: rgba(0,0,0,0.85); 
+            backdrop-filter: blur(5px);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background-color: #141414;
+            border: 2px solid #8a2be2;
+            padding: 30px;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 0 5px 30px rgba(138, 43, 226, 0.4);
+            position: relative;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            left: 20px;
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .close-btn:hover {
+            color: #fff;
+        }
+
+        .modal-title {
+            color: #a855f7;
+            font-size: 26px;
+            margin-bottom: 15px;
+        }
+
+        .modal-price {
+            font-size: 22px;
+            color: #25D366;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .modal-description {
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: right;
+            font-size: 15px;
+            color: #dddddd;
+            border-right: 4px solid #dc2626; /* خط أحمر للتنبيه */
+            margin-bottom: 25px;
+        }
+
+        .modal-description ul {
+            list-style: none;
+        }
+
+        .modal-description li {
+            margin-bottom: 8px;
+        }
+
+        .whatsapp-order-btn {
+            background: #25D366;
+            color: #fff;
+            padding: 14px 30px;
+            border-radius: 12px;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: bold;
+            font-size: 16px;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .whatsapp-order-btn:hover {
+            background: #20ba5a;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+        }
+
+        /* زر واتساب العائم */
+        .whatsapp-fixed {
+            position: fixed;
+            bottom: 25px;
+            left: 25px;
+            background: #25D366;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .whatsapp-fixed:hover {
+            transform: scale(1.08);
+            background: #20ba5a;
+            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.5);
+        }
+
+        /* الفوتر */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid #1a1a1a;
+            color: #666666;
+            font-size: 14px;
+        }
+
+        /* الشاشات الصغيرة */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 38px;
+            }
+            .section-title {
+                font-size: 28px;
+            }
+            .container {
+                padding: 40px 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- شريط التنبيه العلوي -->
+    <div class="alert-bar">
+        ‼️ يرجى قراءة وصف المنتج قبل الشراء؛ عند شرائك للمنتج تعتبر أنك قرأت ووافقت على جميع الشروط.
+    </div>
+
+    <!-- رأس الصفحة -->
+    <header>
+        <img src="logo.png" class="logo" alt="PHANTOM Logo">
+        <h1>PHANTOM</h1>
+        <p class="subtitle">متجر الحسابات المميزة | خدمة سريعة ودعم مستمر</p>
+        <a class="btn" href="https://wa.me/966592702772" target="_blank">تواصل عبر واتساب</a>
+    </header>
+
+    <!-- قسم الحسابات المتوفرة -->
+    <section class="container">
+        <h2 class="section-title">الحسابات المتوفرة</h2>
+        <div class="grid-layout">
+            
+            <!-- كرت المنتج الأول -->
+            <div class="card" onclick="openModal('حساب 150 سكن', '51 ريال')">
+                <h3>حساب 150 سكن</h3>
+                <p>حساب مميز وجاهز للتسليم الفوري</p>
+                <div class="price">51 ريال</div>
+                <div class="view-details">اضغط لعرض الوصف والطلب</div>
+            </div>
+
+            <!-- كرت المنتج الثاني -->
+            <div class="card" onclick="openModal('حساب 250 سكن', '120 ريال')">
+                <h3>حساب 250 سكن</h3>
+                <p>سكينات نادرة ومتنوعة تناسب ذوقك</p>
+                <div class="price">120 ريال</div>
+                <div class="view-details">اضغط لعرض الوصف والطلب</div>
+            </div>
+
+            <!-- كرت المنتج الثالث -->
+            <div class="card" onclick="openModal('حساب 300 سكن', '179 ريال')">
+                <h3>حساب 300 سكن</h3>
+                <p>من أفضل وأقوى الحسابات المتوفرة</p>
+                <div class="price">179 ريال</div>
+                <div class="view-details">اضغط لعرض الوصف والطلب</div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- قسم المميزات -->
+    <section class="container">
+        <h2 class="section-title">لماذا PHANTOM ؟</h2>
+        <div class="grid-layout">
+            <div class="card">
+                <h3>⚡ تسليم سريع</h3>
+                <p>تنفيذ الطلبات ونقل ملكية الحساب بأسرع وقت ممكن.</p>
+            </div>
+            <div class="card">
+                <h3>🛡️ دعم مستمر</h3>
+                <p>متواجدون دائماً للرد على استفساراتكم ومساعدتكم.</p>
+            </div>
+            <div class="card">
+                <h3>⭐ تعامل موثوق</h3>
+                <p>الوضوح، الأمان، والالتزام التام مع جميع عملائنا.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- النافذة المنبثقة الموحدة للوصف والشروط -->
+    <div id="productModal" class="modal" onclick="closeModalOutside(event)">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h3 id="modalProductName" class="modal-title">اسم المنتج</h3>
+            <div id="modalProductPrice" class="modal-price">السعر</div>
+            
+            <div class="modal-description">
+                <strong>📝 وصف وشروط المنتج الأساسية:</strong>
+                <ul style="margin-top: 10px;">
+                    <li>• الحسابات غير أساسية.</li>
+                    <li>• ضمان تشغيلي للحساب.</li>
+                    <li>• الربط عشوائي (( احتمال 70% تربط سوني مو أكيد )).</li>
+                    <li style="color: #ff4444; font-weight: bold; margin-top: 10px;">• (( نُخلي المسؤولية بالكامل بعد البيع ولا يمكن استرجاع المبلغ )).</li>
+                </ul>
+            </div>
+
+            <a id="modalWhatsAppBtn" class="whatsapp-order-btn" href="#" target="_blank">
+                💬 للطلب يرجى التواصل عبر الواتساب
+            </a>
+        </div>
+    </div>
+
+    <!-- تذييل الصفحة -->
+    <footer>
+        &copy; 2026 PHANTOM - جميع الحقوق محفوظة.
+    </footer>
+
+    <!-- زر واتساب العائم -->
+    <a class="whatsapp-fixed" href="https://wa.me/966592702772" target="_blank">
+        <span>تواصل معنا</span>
+    </a>
+
+    <!-- أكواد جافاسكريبت للتحكم بالنافذة والرسائل -->
+    <script>
+        function openModal(name, price) {
+            document.getElementById('modalProductName').innerText = name;
+            document.getElementById('modalProductPrice').innerText = "السعر: " + price;
+            
+            // تجهيز نص رسالة الواتساب التلقائية
+            var phoneNumber = "966592702772";
+            var textMessage = "مرحباً متجر فانتوم، أود طلب المنتج: " + name + " بسعر " + price;
+            var whatsappUrl = "https://wa.me/" + phoneNumber + "?text=" + encodeURIComponent(textMessage);
+            
+            document.getElementById('modalWhatsAppBtn').href = whatsappUrl;
+            document.getElementById('productModal').style.display = "flex";
+        }
+
+        function closeModal() {
+            document.getElementById('productModal').style.display = "none";
+        }
+
+        function closeModalOutside(event) {
+            if (event.target == document.getElementById('productModal')) {
+                closeModal();
+            }
+        }
+    </script>
+
+</body>
+</html>
