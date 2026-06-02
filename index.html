@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHANTOM - متجر الحسابات المميزة</title>
+
+    <style>
+        /* إعدادات عامة */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #0a0a0a;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        /* الهيدر (رأس الصفحة) */
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(180deg, #1a0033, #0a0a0a);
+        }
+
+        .logo {
+            width: 200px;
+            max-width: 85%;
+            border-radius: 20px;
+            box-shadow: 0 0 35px rgba(138, 43, 226, 0.6);
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        h1 {
+            margin-top: 20px;
+            font-size: 48px;
+            color: #a855f7;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            margin-top: 12px;
+            color: #b3b3b3;
+            font-size: 19px;
+            font-weight: 300;
+        }
+
+        /* الأزرار */
+        .btn {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 14px 40px;
+            background: #8a2be2;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 17px;
+            box-shadow: 0 4px 15px rgba(138, 43, 226, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #a855f7;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(168, 85, 247, 0.6);
+        }
+
+        /* الحاويات والأقسام */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+            padding: 60px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 34px;
+            margin-bottom: 40px;
+            color: #a855f7;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: #8a2be2;
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        /* شبكة الكروت (الحسابات والميزات) */
+        .grid-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: #141414;
+            padding: 30px;
+            border-radius: 18px;
+            border: 1px solid #252525;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: #8a2be2;
+            box-shadow: 0 10px 25px rgba(138, 43, 226, 0.2);
+        }
+
+        .card h3 {
+            font-size: 22px;
+            margin-bottom: 12px;
+            color: #a855f7;
+        }
+
+        .card p {
+            color: #aaaaaa;
+            font-size: 15px;
+        }
+
+        .price {
+            font-size: 26px;
+            font-weight: bold;
+            color: #ffffff;
+            margin-top: 20px;
+            background: rgba(138, 43, 226, 0.1);
+            padding: 8px;
+            border-radius: 8px;
+            display: inline-block;
+            width: 100%;
+        }
+
+        /* زر واتساب العائم */
+        .whatsapp-fixed {
+            position: fixed;
+            bottom: 25px;
+            left: 25px;
+            background: #25D366;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .whatsapp-fixed:hover {
+            transform: scale(1.08);
+            background: #20ba5a;
+            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.5);
+        }
+
+        /* الفوتر */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid #1a1a1a;
+            color: #666666;
+            font-size: 14px;
+        }
+
+        /* الشاشات الصغيرة */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 38px;
+            }
+            .section-title {
+                font-size: 28px;
+            }
+            .container {
+                padding: 40px 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- رأس الصفحة -->
+    <header>
+        <img src="logo.jpg" class="logo" alt="PHANTOM Logo">
+        <h1>PHANTOM</h1>
+        <p class="subtitle">متجر الحسابات المميزة | خدمة سريعة ودعم مستمر</p>
+        <a class="btn" href="https://wa.me/966592702772" target="_blank">تواصل عبر واتساب</a>
+    </header>
+
+    <!-- قسم الحسابات المتوفرة -->
+    <section class="container">
+        <h2 class="section-title">الحسابات المتوفرة</h2>
+        <div class="grid-layout">
+            <div class="card">
+                <h3>حساب 150 سكن</h3>
+                <p>حساب مميز وجاهز للتسليم الفوري</p>
+                <div class="price">51 ريال</div>
+            </div>
+            <div class="card">
+                <h3>حساب 250 سكن</h3>
+                <p>سكينات نادرة ومتنوعة تناسب ذوقك</p>
+                <div class="price">120 ريال</div>
+            </div>
+            <div class="card">
+                <h3>حساب 300 سكن</h3>
+                <p>من أفضل وأقوى الحسابات المتوفرة</p>
+                <div class="price">179 ريال</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم المميزات -->
+    <section class="container">
+        <h2 class="section-title">لماذا PHANTOM ؟</h2>
+        <div class="grid-layout">
+            <div class="card">
+                <h3>⚡ تسليم سريع</h3>
+                <p>تنفيذ الطلبات ونقل ملكية الحساب بأسرع وقت ممكن.</p>
+            </div>
+            <div class="card">
+                <h3>🛡️ دعم مستمر</h3>
+                <p>متواجدون دائماً للرد على استفساراتكم ومساعدتكم.</p>
+            </div>
+            <div class="card">
+                <h3>⭐ تعامل موثوق</h3>
+                <p>الوضوح، الأمان، والالتزام التام مع جميع عملائنا.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- تذييل الصفحة -->
+    <footer>
+        &copy; 2026 PHANTOM - جميع الحقوق محفوظة.
+    </footer>
+
+    <!-- زر واتساب العائم -->
+    <a class="whatsapp-fixed" href="https://wa.me/966592702772" target="_blank">
+        <span>تواصل معنا</span>
+    </a>
+
+</body>
+</html>
