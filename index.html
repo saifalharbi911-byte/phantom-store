@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>متجر فانتوم لبيع حسابات فورت نايت 🏆</title>
+    <style>
+        :root {
+            --primary-color: #8a2be2;
+            --secondary-color: #4b0082;
+            --dark-bg: #0b0c10;
+            --card-bg: #1f2833;
+            --text-color: #c5c6c7;
+            --text-white: #ffffff;
+            --accent-color: #66fcf1;
+            --alert-bg: #d9534f;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding-bottom: 60px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            color: var(--text-white);
+            text-align: center;
+            padding: 40px 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+
+        header img.logo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--accent-color);
+            margin-bottom: 15px;
+            box-shadow: 0 0 20px rgba(102, 252, 241, 0.6);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+        }
+
+        header p.subtitle {
+            font-size: 1.1rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+
+        header .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--dark-bg);
+            padding: 10px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        header .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(102, 252, 241, 0.5);
+        }
+
+        /* شريط التنبيه الهام للمتجر */
+        .alert-banner {
+            background-color: var(--alert-bg);
+            color: white;
+            text-align: center;
+            padding: 15px 20px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            border-radius: 10px;
+            max-width: 1160px;
+            margin: 30px auto 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--text-white);
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent-color);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        .grid-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 25px rgba(138, 43, 226, 0.4);
+            border-color: var(--primary-color);
+        }
+
+        .product-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        .card-content {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            text-align: center;
+        }
+
+        .card h3 {
+            color: var(--text-white);
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            color: var(--text-color);
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+
+        .price {
+            font-size: 1.4rem;
+            color: var(--accent-color);
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .view-details {
+            background-color: var(--primary-color);
+            color: var(--text-white);
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+
+        .card:hover .view-details {
+            background-color: var(--secondary-color);
+        }
+
+        /* Modal (النافذة المنبثقة للطلب) */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            border: 2px solid var(--accent-color);
+            box-shadow: 0 0 25px rgba(102, 252, 241, 0.4);
+            position: relative;
+        }
+
+        .modal h2 {
+            color: var(--text-white);
+            margin-bottom: 15px;
+        }
+
+        .modal-conditions {
+            text-align: right;
+            background: rgba(0,0,0,0.2);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+            border-right: 4px solid var(--accent-color);
+        }
+
+        .modal-conditions li {
+            list-style: none;
+            margin-bottom: 5px;
+        }
+
+        .modal .btn-order {
+            display: inline-block;
+            background-color: #25d366;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: transform 0.2s;
+        }
+
+        .modal .btn-order:hover {
+            transform: scale(1.05);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.5rem;
+            color: var(--text-white);
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="IMG_4358.jpeg" class="logo" alt="PHANTOM Logo">
+        <h1>PHANTOM</h1>
+        <p class="subtitle">متجر فانتوم لبيع الحسابات المميزة | خدمة سريعة ودعم مستمر</p>
+        <a class="btn" href="https://wa.me/966592702772" target="_blank">تواصل معنا واتساب</a>
+    </header>
+
+    <div class="alert-banner">
+        ‼️ يرجى قراءة الوصف قبل الشراء، وعند شراءك للمنتج تعتبر أنك قريت الشروط ووافقت عليها.
+    </div>
+
+    <section class="container">
+        <h2 class="section-title">الحسابات المتوفرة</h2>
+        <div class="grid-layout">
+
+            <div class="card" onclick="openModal('شيطون مع سكنات اخرى', '159 ريال')">
+                <img src="FB3208A4-A4B9-4655-B136-FB5336BD8AC2.jpeg" class="product-img" alt="شيطون">
+                <div class="card-content">
+                    <h3>شيطون مع سكنات اخرى</h3>
+                    <p>حساب نادر وفخم يحتوي على سكن الشيطون الأساسي.</p>
+                    <div class="price">159 ريال</div>
+                    <div class="view-details">اضغط لعرض الشروط والطلب</div>
+                </div>
+            </div>
+
+            <div class="card" onclick="openModal('بنت الديسكو مع سكنات اخرى', '99 ريال')">
+                <img src="6E96DBFD-AD88-4A65-8806-328C6F34AE59.jpeg" class="product-img" alt="بنت الديسكو">
+                <div class="card-content">
+                    <h3>بنت الديسكو مع سكنات اخرى</h3>
+                    <p>حساب مميز ونادر يحتوي على سكن بنت الديسكو.</p>
+                    <div class="price">99 ريال</div>
+                    <div class="view-details">اضغط لعرض الشروط والطلب</div>
+                </div>
+            </div>
+
+            <div class="card" onclick="openModal('سيزون 3 كامل مع سكنات اخرى', '29 ريال')">
+                <img src="F5CEA3A8-D08C-444C-82F1-001C9E5E2012.jpeg" class="product-img" alt="سيزون 3 كامل">
+                <div class="card-content">
+                    <h3>سيزون 3 كامل مع سكنات اخرى</h3>
+                    <p>يحتوي على جميع أغراض الجواز الموسمي الثالث كاملاً.</p>
+                    <div class="price">29 ريال</div>
+                    <div class="view-details">اضغط لعرض الشروط والطلب</div>
+                </div>
+            </div>
+
+            <div class="card" onclick="openModal('الجلكسي مع سكنات اخرى', '79 ريال')">
+                <img src="61EA35AF-81C6-4E60-AF1F-36E05DD05DBC.jpeg" class="product-img" alt="الجلكسي">
+                <div class="card-content">
+                    <h3>الجلكسي مع سكنات اخرى</h3>
+                    <p>حساب أسطوري يحتوي على سكن الجلكسي النادر جداً.</p>
+                    <div class="price">79 ريال</div>
+                    <div class="view-details">اضغط لعرض الشروط والطلب</div>
+                </div>
+            </div>
+
+            <div class="card" onclick="openModal('ترافيس سكوت مع سكنات اخرى', '99 ريال')">
+                <img src="9ADC1E3D-4825-4D8D-9A98-E3DFC8DC3162.jpeg" class="product-img" alt="ترافيس سكوت">
+                <div class="card-content">
+                    <h3>ترافيس سكوت مع سكنات اخرى</h3>
+                    <p>حساب الفخامة يحتوي على سكن المغني ترافيس سكوت.</p>
+                    <div class="price">99 ريال</div>
+                    <div class="view-details">اضغط لعرض الشروط والطلب</div>
+                </div>
+            </div>
+
+            <div class="card" onclick="openModal('اكس النعناع مع سكنات اخرى', '79 ريال')">
+                <img src="068C42FF-47DB-40C2-98C6-AF8B36DC7B55.jpeg" class="product-img" alt="اكس النعناع">
+                <div class="card-content">
+                    <h3>اكس النعناع مع سكنات اخرى</h3>
+                    <p>حساب مميز يحتوي على فاس النعناع الشهير والنادر.</p>
+                    <div class="price">79 ريال</div>
+                    <div class="view-details">اضغط لعرض الشروط والطلب</div>
+                </div>
+            </div>
+
+            <div class="card" onclick="openModal('حساب 200+ سكن منوع', '69 ريال')">
+                <img src="61DD7610-7721-4524-B6DC-7D0016F53302.jpeg" class="product-img" alt="200+ سكن">
+                <div class="card-content">
+                    <h3>200+ سكن</h3>
+                    <p>حساب عشوائي مليء بالملحقات ويضم أكثر من 200 سكن.</p>
+                    <div class="price">69 ريال</div>
+                    <div class="view-details">اضغط لعرض الشروط والطلب</div>
+                </div>
+            </div>
+
+            <div class="card" onclick="openModal('حساب 100+ سكن منوع', '39 ريال')">
+                <img src="CFCE6C4F-AFFD-41E8-A4C8-46C765CE262B.jpeg" class="product-img" alt="100+ سكن">
+                <div class="card-content">
+                    <h3>100+ سكن</h3>
+                    <p>حساب ممتاز ومضمون يحتوي على أكثر من 100 سكن منوع.</p>
+                    <div class="price">39 ريال</div>
+                    <div class="view-details">اضغط لعرض الشروط والطلب</div>
+                </div>
+            </div>
+
+            <div class="card" onclick="openModal('حساب عشوائي ضمان سكنات', '15 ريال')">
+                <img src="61DD7610-7721-4524-B6DC-7D0016F53302.jpeg" class="product-img" alt="حساب عشوائي">
+                <div class="card-content">
+                    <h3>حساب عشوائي ضمان سكنات</h3>
+                    <p>حساب فورت نايت عشوائي ومضمون السكنات لتجربة حظك.</p>
+                    <div class="price">15 ريال</div>
+                    <div class="view-details">اضغط لعرض الشروط والطلب</div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <div id="orderModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle" style="margin-bottom: 10px;">اسم المنتج</h2>
+            <p style="font-size: 1.3rem; margin-bottom: 15px;">السعر: <span id="modalPrice" style="color:#66fcf1; font-weight:bold;"></span></p>
+            
+            <div class="modal-conditions">
+                <p style="font-weight: bold; color: #ff4d4d; margin-bottom: 8px;">📋 وصف وشروط المنتج:</p>
+                <ul>
+                    <li>• الحسابات غير أساسية.</li>
+                    <li>• ضمان تشغيلي للحساب.</li>
+                    <li>• الربط عشوائي ((احتمال 70% تربط سوني مو أكيد)).</li>
+                    <li>• ((نخلي المسؤولية بالكامل بعد البيع ولا يمكن استرجاع المبلغ)).</li>
+                </ul>
+            </div>
+            
+            <p style="margin-bottom: 20px; font-size: 0.9rem;">بالضغط على الزر، أنت توافق على الشروط وسيتم توجيهك مباشرة للواتساب لإتمام عملية الشراء فورا!</p>
+            <a id="whatsappLink" class="btn-order" href="#" target="_blank">موافق، واطلب الآن عبر واتساب 💬</a>
+        </div>
+    </div>
+
+    <script>
+        function openModal(productName, price) {
+            document.getElementById('modalTitle').innerText = productName;
+            document.getElementById('modalPrice').innerText = price;
+            
+            // تجهيز نص الرسالة للواتساب تلقائياً مع الشروط
+            var whatsappNumber = "966592702772";
+            var text = "السلام عليكم، أريد شراء: " + productName + " بسعر " + price + " من متجر فانتوم. وأنا قرأت الوصف وموافق على كافة الشروط.";
+            var encodedText = encodeURIComponent(text);
+            
+            document.getElementById('whatsappLink').href = "https://wa.me/" + whatsappNumber + "?text=" + encodedText;
+            document.getElementById('orderModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('orderModal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            var modal = document.getElementById('orderModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
